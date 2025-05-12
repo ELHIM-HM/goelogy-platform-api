@@ -21,7 +21,7 @@ public class OtherInfos {
 
 
 
-    @JsonIgnore
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "property_id")

@@ -21,15 +21,14 @@ import java.math.BigDecimal;
 @Table(name = "mineral_properties")
 public class MineralProperties {
 
-    @JsonIgnore
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "mineralId")
     private Long mineralId;
 
-    @JsonIgnore
-    @Column(name = "model_id", unique = true) // This is important
-    private Long modelId;
+
+
 
     @Column(name = "name", nullable = false)
     private String name;

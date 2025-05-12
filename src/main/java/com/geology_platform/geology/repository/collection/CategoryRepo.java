@@ -17,4 +17,5 @@ public interface CategoryRepo extends JpaRepository<Category,Long> {
 
     @EntityGraph(attributePaths = "subCategories")
     Optional<Category> findWithSubCategoriesByCategoryId(Long categoryId);
+
 }

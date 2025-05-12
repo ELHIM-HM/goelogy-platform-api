@@ -19,15 +19,14 @@ import lombok.Setter;
 @Table(name = "rock_properties")
 public class RockProperties {
 
-    @JsonIgnore
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "rockId")
     private Long rockId;
 
-    @JsonIgnore
-    @Column(name = "model_id", unique = true) // This is important
-    private Long modelId;
+
+
 
     @Column(name = "name", nullable = false)
     private String name;

@@ -11,4 +11,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface SubCateogryRepo extends JpaRepository<SubCategory,Long> {
     boolean existsByName(String name);
+
+    SubCategory findByNameIgnoreCase(String subcategory);
 }

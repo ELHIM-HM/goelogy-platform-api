@@ -1,23 +1,24 @@
 package com.geology_platform.geology.dto.request.collection;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.geology_platform.geology.entity.collection.FossilProperties;
+import com.geology_platform.geology.entity.collection.MineraisProperties;
+import com.geology_platform.geology.entity.collection.MineralProperties;
 import com.geology_platform.geology.entity.collection.OtherInfos;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
  * @author ELHIM Hamza
  **/
 
+
 @Getter
 @Setter
 @AllArgsConstructor
-public class RequestFossilModel {
+public class RequestMineraisModel {
 
     private String inventoryNumber;
 
@@ -25,10 +26,10 @@ public class RequestFossilModel {
 
     private Long subcategoryId;
 
-    private List<OtherInfos> otherInfos ;
-
     @JsonIgnore
     private String categoryName;
 
-    private FossilProperties fossilProperties;;
+    private List<OtherInfos> otherInfos ;
+
+    private MineraisProperties mineraisProperties;
 }

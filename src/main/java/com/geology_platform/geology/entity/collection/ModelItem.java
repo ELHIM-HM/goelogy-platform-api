@@ -1,10 +1,7 @@
 package com.geology_platform.geology.entity.collection;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +16,7 @@ import java.util.List;
 @AllArgsConstructor
 @Entity
 @Table(name = "model_item")
+@ToString
 public class ModelItem {
 
     @Id
@@ -29,6 +27,9 @@ public class ModelItem {
     @Column(name = "inventory_number")
     private String inventoryNumber;
 
+    @Column(name = "category_name")
+    private String categoryName;
+
 
     @Column(name = "model_url")
     private String modelURL;
@@ -38,16 +39,20 @@ public class ModelItem {
     private List<OtherInfos> otherInfos = new ArrayList<>();
 
     @OneToOne(cascade = CascadeType.ALL , fetch = FetchType.EAGER)
-    @JoinColumn(name = "model_id")
+    @JoinColumn(name = "model_id_mineral")
     private MineralProperties mineralProperties;
 
     @OneToOne(cascade = CascadeType.ALL , fetch = FetchType.EAGER)
-    @JoinColumn(name = "model_id")
+    @JoinColumn(name = "model_id_rock")
     private RockProperties rockProperties;
 
     @OneToOne(cascade = CascadeType.ALL , fetch = FetchType.EAGER)
-    @JoinColumn(name = "model_id")
+    @JoinColumn(name = "model_id_fossil")
     private FossilProperties fossilProperties;
+
+    @OneToOne(cascade = CascadeType.ALL , fetch = FetchType.EAGER)
+    @JoinColumn(name = "model_id_minerais")
+    private MineraisProperties mineraisProperties;
 
 
     public void addOtherInfos(String name,String value){
