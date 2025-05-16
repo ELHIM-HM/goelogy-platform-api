@@ -20,8 +20,10 @@ import java.util.List;
 public interface ModelItemRepo extends JpaRepository<ModelItem,Long> {
 
 
-    @Query(value = "SELECT m from ModelItem m order by m.modelId desc ")
-    Page<ModelItem> findModels(Pageable pageable);
+
+    Page<ModelItem> findModelItemByCategoryNameOrderByModelIdDesc(Pageable pageable,String categoryName);
+
+    Page<ModelItem> findAllByOrderByModelIdDesc(Pageable pageable);
 
     @Query(value = "SELECT * FROM model_item m WHERE subcategory_id = :subcategoryId ORDER BY model_id desc ",
             countQuery = "SELECT COUNT(*) FROM model_item WHERE subcategory_id = :subcategoryId",

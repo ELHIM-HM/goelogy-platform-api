@@ -11,6 +11,7 @@ import com.geology_platform.geology.service.collection.CollectionService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -25,6 +26,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/models")
 @AllArgsConstructor
+@Tag(name = "3d models api")
 public class CollectionRestController {
 
     private CollectionService collectionService;

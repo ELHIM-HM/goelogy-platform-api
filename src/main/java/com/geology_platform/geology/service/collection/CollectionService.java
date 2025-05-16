@@ -227,7 +227,7 @@ public class CollectionService {
 
     public List<ResponseModelItem> getShuffledModels(Integer page, Integer size,String category,String subcategory) {
         if (size == null || size <= 0) size = 10;
-        if (page == null || page < 0) page = 10;
+        if (page == null || page < 0) page = 0;
 
         Pageable pageable = PageRequest.of(page, size);
 
@@ -236,12 +236,11 @@ public class CollectionService {
 
         if(subcategory != null){
             Long subCategoryId = subCateogryRepo.findByNameIgnoreCase(subcategory).getSubCategoryId();
-
             shuffledPage =  modelItemRepo.findModelsBySubcategoryId(subCategoryId,pageable);
         }else if(category != null){
-            shuffledPage = modelItemRepo.findModels(pageable);
+            shuffledPage = modelItemRepo.findModelItemByCategoryNameOrderByModelIdDesc(pageable,category);
         }else {
-            shuffledPage = modelItemRepo.findModels(pageable);
+            shuffledPage = modelItemRepo.findAllByOrderByModelIdDesc(pageable);
         }
 
 
