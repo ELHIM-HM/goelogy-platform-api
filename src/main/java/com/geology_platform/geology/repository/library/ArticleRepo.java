@@ -1,6 +1,7 @@
 package com.geology_platform.geology.repository.library;
 
 import com.geology_platform.geology.entity.library.Article;
+import com.geology_platform.geology.projection.ArticleProjection;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.EntityGraph;
@@ -16,7 +17,8 @@ import org.springframework.stereotype.Repository;
 public interface ArticleRepo extends JpaRepository<Article,Long> {
 
 
-    @Query(value = "select * from article a where a.category_id = :categoryId ORDER BY a.id desc"
-    ,nativeQuery = true)
-    Page<Article> findArticleByCategoryid(@Param("categoryId") Long categoryId, Pageable pageable);
+
+
+    Page<ArticleProjection> findAllByOrderByIdDesc(Pageable pageable);
+    Page<ArticleProjection> findAllByCategoryIdOrderByIdDesc(Long categoryId,Pageable pageable);
 }

@@ -1,6 +1,8 @@
 package com.geology_platform.geology.dto.request.collection;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.geology_platform.geology.entity.FileData;
 import com.geology_platform.geology.entity.collection.MineraisProperties;
 import com.geology_platform.geology.entity.collection.MineralProperties;
 import com.geology_platform.geology.entity.collection.OtherInfos;
@@ -32,4 +34,10 @@ public class RequestMineraisModel {
     private List<OtherInfos> otherInfos ;
 
     private MineraisProperties mineraisProperties;
+
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    private FileData model3d;
+
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    private FileData video;
 }

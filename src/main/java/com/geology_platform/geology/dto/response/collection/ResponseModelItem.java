@@ -1,5 +1,6 @@
 package com.geology_platform.geology.dto.response.collection;
 
+import com.geology_platform.geology.entity.FileData;
 import com.geology_platform.geology.entity.collection.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -31,5 +32,8 @@ public class ResponseModelItem {
     private MineralProperties mineralProperties;
     private FossilProperties fossilProperties;
     private MineraisProperties mineraisProperties;
+
+    private FileData model3d;
+    private FileData video;
 
 }

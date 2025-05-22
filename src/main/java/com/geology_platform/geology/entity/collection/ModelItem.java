@@ -1,5 +1,6 @@
 package com.geology_platform.geology.entity.collection;
 
+import com.geology_platform.geology.entity.FileData;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -31,9 +32,6 @@ public class ModelItem {
     private String categoryName;
 
 
-    @Column(name = "model_url")
-    private String modelURL;
-
     @OneToMany(cascade = CascadeType.ALL , fetch = FetchType.EAGER)
     @JoinColumn(name = "model_id")
     private List<OtherInfos> otherInfos = new ArrayList<>();
@@ -53,6 +51,15 @@ public class ModelItem {
     @OneToOne(cascade = CascadeType.ALL , fetch = FetchType.EAGER)
     @JoinColumn(name = "model_id_minerais")
     private MineraisProperties mineraisProperties;
+
+    @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @JoinColumn(name = "model_id")
+    private FileData model3d;
+
+    @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @JoinColumn(name = "video_id")
+    private FileData video;
+
 
 
     public void addOtherInfos(String name,String value){

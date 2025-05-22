@@ -1,6 +1,9 @@
 package com.geology_platform.geology.entity.library;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.geology_platform.geology.entity.FileData;
+import com.geology_platform.geology.entity.collection.Category;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -33,12 +36,22 @@ public class Article {
     @Column(name = "descreption")
     private String descreption;
 
+    private String videoUrl;
 
-    @Column(name = "cover_image_url")
-    private String coverImage;
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private ArticleCategory category;
 
-    @Column(name = "data_url")
-    private String dataUrl;
+
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "cover_image_id")
+    private FileData coverImage;
+
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "data_id")
+    private FileData fileData;
 
 
 }

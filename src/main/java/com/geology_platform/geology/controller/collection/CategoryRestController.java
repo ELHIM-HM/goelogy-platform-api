@@ -27,7 +27,7 @@ public class CategoryRestController {
 
     private CategoryService categoryService;
 
-    //    ============== crud operation for for  categories and sub categories all tested =========
+    //    ============== crud operation  for  categories and sub categories all tested =========
 
 
     @Operation(summary = "Create a new category" )

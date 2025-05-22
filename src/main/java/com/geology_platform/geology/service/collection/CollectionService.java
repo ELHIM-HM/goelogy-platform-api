@@ -11,13 +11,16 @@ import com.geology_platform.geology.exception.collection.ModelNotFound;
 import com.geology_platform.geology.exception.collection.SubCategoryNotFound;
 import com.geology_platform.geology.mapper.collection.*;
 import com.geology_platform.geology.repository.collection.*;
+import com.geology_platform.geology.service.fileUpload.FileUploadServiceImpl;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -50,17 +53,27 @@ public class CollectionService {
     private MineraisMapper mineraisMapper;
     private MineraisRepo mineraisRepo;
 
+    private FileUploadServiceImpl fileUploadService;
 
 
     @Transactional
-    public void createRockModel(RequestRockModel requestRockModel) {
+    public void createRockModel(RequestRockModel requestRockModel, MultipartFile model3d,MultipartFile video) throws IOException {
 
         SubCategory subCategory = subCateogryRepo.findById(requestRockModel.getSubcategoryId()).orElseThrow(()->new SubCategoryNotFound(requestRockModel.getSubcategoryId()));
 
+        System.out.println("sub category found"+subCategory);
+
         requestRockModel.setCategoryName("rock");
 
+        requestRockModel.setModel3d(fileUploadService.uploadFileToFileSystem(model3d));
+        requestRockModel.setVideo(fileUploadService.uploadFileToFileSystem(video));
+
+
+//        ModelItem modelItem = modelItemRepo.save(rockModelMapper.toEntity(requestRockModel));
 
         subCategory.addModelItem(rockModelMapper.toEntity(requestRockModel));
+
+        System.out.println("saving sub category");
 
         subCateogryRepo.save(subCategory);
 
@@ -69,11 +82,14 @@ public class CollectionService {
 
 
     @Transactional
-    public void createFossilModel(RequestFossilModel requestFossilModel) {
+    public void createFossilModel(RequestFossilModel requestFossilModel,MultipartFile model3d,MultipartFile video) throws IOException {
 
         SubCategory subCategory = subCateogryRepo.findById(requestFossilModel.getSubcategoryId()).orElseThrow(()->new SubCategoryNotFound(requestFossilModel.getSubcategoryId()));
 
         requestFossilModel.setCategoryName("fossil");
+
+        requestFossilModel.setModel3d(fileUploadService.uploadFileToFileSystem(model3d));
+        requestFossilModel.setVideo(fileUploadService.uploadFileToFileSystem(video));
 
 
         subCategory.addModelItem(fossilModelMapper.toEntity(requestFossilModel));
@@ -84,11 +100,14 @@ public class CollectionService {
     }
 
     @Transactional
-    public void createMineralModel(RequestMineralModel requestMineralModel) {
+    public void createMineralModel(RequestMineralModel requestMineralModel,MultipartFile model3d,MultipartFile video) throws IOException {
 
         SubCategory subCategory = subCateogryRepo.findById(requestMineralModel.getSubcategoryId()).orElseThrow(()->new SubCategoryNotFound(requestMineralModel.getSubcategoryId()));
 
         requestMineralModel.setCategoryName("mineral");
+
+        requestMineralModel.setModel3d(fileUploadService.uploadFileToFileSystem(model3d));
+        requestMineralModel.setVideo(fileUploadService.uploadFileToFileSystem(video));
 
 
         subCategory.addModelItem(mineralModelMapper.toEntity(requestMineralModel));
@@ -99,11 +118,14 @@ public class CollectionService {
     }
 
     @Transactional
-    public void createMineraisModel(RequestMineraisModel requestMineraisModel) {
+    public void createMineraisModel(RequestMineraisModel requestMineraisModel,MultipartFile model3d,MultipartFile video) throws IOException {
 
         SubCategory subCategory = subCateogryRepo.findById(requestMineraisModel.getSubcategoryId()).orElseThrow(()->new SubCategoryNotFound(requestMineraisModel.getSubcategoryId()));
 
         requestMineraisModel.setCategoryName("minerais");
+
+        requestMineraisModel.setModel3d(fileUploadService.uploadFileToFileSystem(model3d));
+        requestMineraisModel.setVideo(fileUploadService.uploadFileToFileSystem(video));
 
 
         subCategory.addModelItem(mineraisMapper.toEntity(requestMineraisModel));
@@ -133,7 +155,6 @@ public class CollectionService {
         ModelItem modelItem = modelItemRepo.findById(modelId).orElseThrow(()->new ModelNotFound(modelId));
 
 
-        modelItem.setModelURL(requestRockModel.getModelURL());
         modelItem.setInventoryNumber(requestRockModel.getInventoryNumber());
 
 
@@ -157,7 +178,6 @@ public class CollectionService {
     public void updateMineralModel(Long modelId,RequestMineralModel requestMineralModel){
         ModelItem modelItem = modelItemRepo.findById(modelId).orElseThrow(()->new ModelNotFound(modelId));
 
-        modelItem.setModelURL(requestMineralModel.getModelURL());
         modelItem.setInventoryNumber(requestMineralModel.getInventoryNumber());
 
 
@@ -181,7 +201,6 @@ public class CollectionService {
     public void updateMineraisModel(Long modelId,RequestMineraisModel requestMineraisModel){
         ModelItem modelItem = modelItemRepo.findById(modelId).orElseThrow(()->new ModelNotFound(modelId));
 
-        modelItem.setModelURL(requestMineraisModel.getModelURL());
         modelItem.setInventoryNumber(requestMineraisModel.getInventoryNumber());
 
 
@@ -204,7 +223,6 @@ public class CollectionService {
     public void updateFossilModel(Long modelId,RequestFossilModel requestFossilModel){
         ModelItem modelItem = modelItemRepo.findById(modelId).orElseThrow(()->new ModelNotFound(modelId));
 
-        modelItem.setModelURL(requestFossilModel.getModelURL());
         modelItem.setInventoryNumber(requestFossilModel.getInventoryNumber());
 
 
@@ -248,7 +266,4 @@ public class CollectionService {
                 .map(model -> modelItemMapper.toResponseModelItem(model,model.getCategoryName())).collect(Collectors.toList());
 
     }
-
-
-
 }

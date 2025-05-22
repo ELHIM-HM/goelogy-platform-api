@@ -15,7 +15,9 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 
@@ -41,29 +43,29 @@ public class CollectionRestController {
     @Operation(summary = "Create a new rock model")
     @PostMapping("/rocks")
     @ResponseStatus(HttpStatus.CREATED)
-    public void createModelItem(@RequestBody RequestRockModel requestRockModel){
-        collectionService.createRockModel(requestRockModel);
+    public void createModelItem(@RequestPart("model") RequestRockModel requestRockModel , @RequestPart(value = "model3d",required = false) MultipartFile model3d,@RequestPart(value = "video",required = false) MultipartFile video) throws IOException {
+        collectionService.createRockModel(requestRockModel,model3d,video);
     }
 
     @Operation(summary = "Create a new mineral model")
     @PostMapping("/minerals")
     @ResponseStatus(HttpStatus.CREATED)
-    public void createModelItem(@RequestBody RequestMineralModel requestMineralModel){
-        collectionService.createMineralModel(requestMineralModel);
+    public void createModelItem(@RequestPart("model") RequestMineralModel requestMineralModel , @RequestPart("model3d") MultipartFile model3d,@RequestPart("video") MultipartFile video) throws IOException {
+        collectionService.createMineralModel(requestMineralModel,model3d,video);
     }
 
     @Operation(summary = "Create a new minerais model")
     @PostMapping("/minerais")
     @ResponseStatus(HttpStatus.CREATED)
-    public void createModelItem(@RequestBody RequestMineraisModel requestMineraisModel){
-        collectionService.createMineraisModel(requestMineraisModel);
+    public void createModelItem(@RequestPart("model") RequestMineraisModel requestMineraisModel , @RequestPart("model3d") MultipartFile model3d,@RequestPart("video") MultipartFile video) throws IOException {
+        collectionService.createMineraisModel(requestMineraisModel,model3d,video);
     }
 
     @Operation(summary = "Create a new fossil model")
     @PostMapping("/fossils")
     @ResponseStatus(HttpStatus.CREATED)
-    public void createModelItem(@RequestBody RequestFossilModel requestFossilModel){
-        collectionService.createFossilModel(requestFossilModel);
+    public void createModelItem(@RequestPart("model") RequestFossilModel requestFossilModel , @RequestPart("model3d") MultipartFile model3d,@RequestPart("video") MultipartFile video) throws IOException {
+        collectionService.createFossilModel(requestFossilModel,model3d,video);
     }
 
 

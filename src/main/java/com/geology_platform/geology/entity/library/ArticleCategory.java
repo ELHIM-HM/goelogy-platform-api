@@ -32,13 +32,13 @@ public class ArticleCategory {
     private String name;
 
 
-@OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL,orphanRemoval = true)
-    @JoinColumn(name = "category_id")
+@OneToMany(mappedBy = "category",fetch = FetchType.LAZY,cascade = CascadeType.ALL,orphanRemoval = true)
     private List<Article> articles = new ArrayList<>();
 
     public void addArticle(Article article){
         if(!articles.contains(article)){
             articles.add(article);
+            article.setCategory(this);
         }
     }
 
