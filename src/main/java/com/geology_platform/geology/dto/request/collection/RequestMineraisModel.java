@@ -24,7 +24,6 @@ public class RequestMineraisModel {
 
     private String inventoryNumber;
 
-    private String modelURL;
 
     private Long subcategoryId;
 

@@ -59,7 +59,9 @@ public class CollectionService {
     @Transactional
     public void createRockModel(RequestRockModel requestRockModel, MultipartFile model3d,MultipartFile video) throws IOException {
 
-        SubCategory subCategory = subCateogryRepo.findById(requestRockModel.getSubcategoryId()).orElseThrow(()->new SubCategoryNotFound(requestRockModel.getSubcategoryId()));
+
+
+        SubCategory subCategory = subCateogryRepo.findById(1L).orElseThrow(()->new SubCategoryNotFound(requestRockModel.getSubcategoryId()));
 
         System.out.println("sub category found"+subCategory);
 
@@ -68,12 +70,7 @@ public class CollectionService {
         requestRockModel.setModel3d(fileUploadService.uploadFileToFileSystem(model3d));
         requestRockModel.setVideo(fileUploadService.uploadFileToFileSystem(video));
 
-
-//        ModelItem modelItem = modelItemRepo.save(rockModelMapper.toEntity(requestRockModel));
-
         subCategory.addModelItem(rockModelMapper.toEntity(requestRockModel));
-
-        System.out.println("saving sub category");
 
         subCateogryRepo.save(subCategory);
 

@@ -53,11 +53,11 @@ public class ModelItem {
     private MineraisProperties mineraisProperties;
 
     @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
-    @JoinColumn(name = "model_id")
+    @JoinColumn(name = "model_file_id")
     private FileData model3d;
 
     @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
-    @JoinColumn(name = "video_id")
+    @JoinColumn(name = "video_file_id")
     private FileData video;
 
 

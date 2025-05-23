@@ -43,7 +43,7 @@ public class CollectionRestController {
     @Operation(summary = "Create a new rock model")
     @PostMapping("/rocks")
     @ResponseStatus(HttpStatus.CREATED)
-    public void createModelItem(@RequestPart("model") RequestRockModel requestRockModel , @RequestPart(value = "model3d",required = false) MultipartFile model3d,@RequestPart(value = "video",required = false) MultipartFile video) throws IOException {
+    public void createModelItem(@RequestPart("model") RequestRockModel requestRockModel , @RequestPart(value = "model3d") MultipartFile model3d,@RequestPart(value = "video") MultipartFile video) throws IOException {
         collectionService.createRockModel(requestRockModel,model3d,video);
     }
 

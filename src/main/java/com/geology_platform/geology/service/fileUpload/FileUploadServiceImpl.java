@@ -28,10 +28,12 @@ public class FileUploadServiceImpl implements FileUploadService {
     @Override
     public FileData uploadFileToFileSystem(MultipartFile file) throws IOException {
 
-        String filePath = FOLDER_PATH+file.getOriginalFilename();
+        String filePath = FOLDER_PATH+System.currentTimeMillis()+file.getOriginalFilename();
+
+        String fileName = System.currentTimeMillis()+file.getOriginalFilename();
 
         FileData fileData = FileData.builder()
-                        .name(file.getOriginalFilename())
+                        .name(fileName)
                         .type(file.getContentType())
                         .filePath(filePath)
                 .build();

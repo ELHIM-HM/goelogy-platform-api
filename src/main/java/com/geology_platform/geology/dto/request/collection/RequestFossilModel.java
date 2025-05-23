@@ -23,7 +23,7 @@ public class RequestFossilModel {
 
     private String inventoryNumber;
 
-    private String modelURL;
+
 
     private Long subcategoryId;
 

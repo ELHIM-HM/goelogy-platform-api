@@ -27,9 +27,6 @@ public class RockProperties {
     @Column(name = "rockId")
     private Long rockId;
 
-
-
-
     @Column(name = "name", nullable = false)
     private String name;
 

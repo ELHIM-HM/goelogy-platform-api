@@ -24,7 +24,6 @@ public class RequestRockModel {
 
     private String inventoryNumber;
 
-    private String modelURL;
 
     private Long subcategoryId;
 
@@ -36,10 +35,10 @@ public class RequestRockModel {
     private RockProperties rockProperties ;
 
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    private FileData model3d = null;
+    private FileData model3d;
 
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    private FileData video = null;
+    private FileData video;
 
 
 
