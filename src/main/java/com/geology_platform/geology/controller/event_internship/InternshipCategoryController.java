@@ -27,20 +27,20 @@ public class InternshipCategoryController {
         return categoryService.getCategoryById(id);
     }
 
-    @PostMapping("internshipCategory/create/")
+    @PostMapping("internshipCategory/")
     @ResponseStatus(HttpStatus.CREATED)
     public InternshipCategoryDTO createCategory(@RequestBody InternshipCategoryDTO dto){
         return categoryService.createCategory(dto);
     }
 
-    @PutMapping("internshipCategory/update/{id}/")
+    @PutMapping("internshipCategory/{id}/")
     @ResponseStatus(HttpStatus.OK)
     public  InternshipCategoryDTO updateCategory( @PathVariable long id, @RequestBody InternshipCategoryDTO dto) throws Exception {
         System.out.println("====updating category.....");
         return categoryService.updateCategory(id,dto);
     }
 
-    @DeleteMapping("internshipCategory/delete/{id}/")
+    @DeleteMapping("internshipCategory/{id}/")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<String> deleteCategory( @PathVariable int id) throws Exception {
         System.out.println("====deleting category.....");

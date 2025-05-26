@@ -27,6 +27,7 @@ public class ActivitySectorServiceImpl implements IActivitySectorService {
         ActivitySector sector =sectorRepo.findById(id)
                 .orElseThrow(()->new SectorNotFoundException("this sector couldn't be found"));
         ActivitySectorDTO dto = new ActivitySectorDTO();
+        dto.setId(sector.getId());
         dto.setLabel(sector.getLabel());
         return dto;
     }
@@ -37,7 +38,7 @@ public class ActivitySectorServiceImpl implements IActivitySectorService {
         Page<ActivitySector> sectorsPage = sectorRepo.findAll(pageable);
 
         return sectorsPage.getContent().stream()
-                .map(sector -> new ActivitySectorDTO(sector.getLabel()))
+                .map(sector -> new ActivitySectorDTO(sector.getId(), sector.getLabel()))
                 .toList();
     }
 
@@ -50,6 +51,7 @@ public class ActivitySectorServiceImpl implements IActivitySectorService {
         ActivitySector sector = new ActivitySector();
         sector.setLabel(dto.getLabel());
         sectorRepo.save(sector);
+        dto.setId(sector.getId());
         return dto;
     }
 
@@ -62,6 +64,7 @@ public class ActivitySectorServiceImpl implements IActivitySectorService {
         }
 
         sector.setLabel(dto.getLabel());
+        dto.setId(sector.getId());
         return dto;
 
     }

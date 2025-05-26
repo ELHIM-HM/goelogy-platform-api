@@ -28,6 +28,7 @@ public class EventCategoryServiceImpl implements IEventCategoryService {
                 .map((event)->{
                     EventCategoryDTO dto = new EventCategoryDTO();
                     dto.setLabel(event.getLabel());
+                    dto.setId(event.getId());
                     return dto;
                 }).collect(Collectors.toList());
     }
@@ -38,6 +39,7 @@ public class EventCategoryServiceImpl implements IEventCategoryService {
                 .orElseThrow(()->new EventCategoryNotFoundException("category couldn't be found"));
         EventCategoryDTO dto = new EventCategoryDTO();
         dto.setLabel(category.getLabel());
+        dto.setId(category.getId());
         return dto;
 
     }
@@ -48,6 +50,7 @@ public class EventCategoryServiceImpl implements IEventCategoryService {
             EventCategory category = new EventCategory();
             category.setLabel(dto.getLabel());
             categoryRepo.save(category);
+            dto.setId(category.getId());
             return dto;
     }
 
@@ -57,6 +60,7 @@ public class EventCategoryServiceImpl implements IEventCategoryService {
         EventCategory category = categoryRepo.findById(id)
                 .orElseThrow(()->new EventCategoryNotFoundException("category couldn't be found"));
         category.setLabel(dto.getLabel());
+        dto.setId(category.getId());
         return dto;
     }
 

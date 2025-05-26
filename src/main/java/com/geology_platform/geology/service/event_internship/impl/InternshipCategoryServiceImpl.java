@@ -51,6 +51,7 @@ public class InternshipCategoryServiceImpl implements IinternshipCategoryService
         InternshipCategory category =InternshipCategoryMapper.toEntity(dto);
         System.out.println("=========="+category.getLabel());
         categoryRepo.save(category);
+        dto.setId(category.getId());
         return InternshipCategoryMapper.toDTO(category);
     }
 
@@ -66,7 +67,8 @@ public class InternshipCategoryServiceImpl implements IinternshipCategoryService
 
         System.out.println("========"+category.getLabel());
         category.setLabel(dto.getLabel());
-        return InternshipCategoryMapper.toDTO(category);
+        dto.setId(category.getId());
+        return dto;
     }
 
     public void deleteCategory(long id) throws Exception{
