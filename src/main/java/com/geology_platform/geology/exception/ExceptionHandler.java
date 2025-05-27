@@ -14,7 +14,8 @@ public class ExceptionHandler {
                     InternshipCategoryNotFoundException.class,
                     EventCategoryNotFoundException.class,
                     EventNotFoundException.class,
-                    SectorNotFoundException.class
+                    SectorNotFoundException.class,
+                    JobNotFoundException.class
             }
             )
 

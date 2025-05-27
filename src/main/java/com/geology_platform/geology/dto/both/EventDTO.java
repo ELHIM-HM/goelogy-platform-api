@@ -10,6 +10,8 @@ import java.time.LocalDate;
 @Data
 @NoArgsConstructor @AllArgsConstructor
 public class EventDTO {
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    private int id;
     private String location;
     private LocalDate date;
     private String title;

@@ -46,6 +46,12 @@ public class IntershipServiceImpl implements IinternshipService {
         dto.setEndDate(internship.getEndDate());
         dto.setCategoryId(internship.getCategory().getId());
         dto.setSectorId(internship.getSector().getId());
+        dto.setId(internship.getId());
+        dto.setCountry(internship.getCountry());
+        dto.setCity(internship.getCity());
+        dto.setRecruiter(internship.getRecruiter());
+        dto.setRecruiterEmail(internship.getRecruiterEmail());
+        dto.setRecruiterPhoneNumber(internship.getRecruiterPhoneNumber());
         return dto;
     }
 
@@ -53,16 +59,25 @@ public class IntershipServiceImpl implements IinternshipService {
     public List<InternshipDTO> getAllInternships(int page,int size) {
         Pageable pageable = PageRequest.of(page, size);
         Page<Internship> internships = internshipRepo.findAll(pageable);
+        System.out.println("tal hna mzn");
         return internships.stream()
                 .map(internship -> {
                     InternshipDTO dto = new InternshipDTO();
+                    dto.setId(internship.getId());
                     dto.setDescription(internship.getDescription());
                     dto.setRemuneration(internship.getRemuneration());
                     dto.setTitle(internship.getTitle());
                     dto.setStartDate(internship.getStartDate());
                     dto.setEndDate(internship.getEndDate());
+                    System.out.println("wash hna");
                     dto.setCategoryId(internship.getCategory().getId());
+                    System.out.println("idan mashi hna");
                     dto.setSectorId(internship.getSector().getId());
+                    dto.setCountry(internship.getCountry());
+                    dto.setCity(internship.getCity());
+                    dto.setRecruiter(internship.getRecruiter());
+                    dto.setRecruiterEmail(internship.getRecruiterEmail());
+                    dto.setRecruiterPhoneNumber(internship.getRecruiterPhoneNumber());
                     return dto;
                 })
                 .collect(Collectors.toList());
@@ -87,6 +102,12 @@ public class IntershipServiceImpl implements IinternshipService {
                     dto.setEndDate(internship.getEndDate());
                     dto.setCategoryId(internship.getCategory().getId());
                     dto.setSectorId(internship.getSector().getId());
+                    dto.setId(internship.getId());
+                    dto.setCountry(internship.getCountry());
+                    dto.setCity(internship.getCity());
+                    dto.setRecruiter(internship.getRecruiter());
+                    dto.setRecruiterEmail(internship.getRecruiterEmail());
+                    dto.setRecruiterPhoneNumber(internship.getRecruiterPhoneNumber());
                     return dto;
                 })
                 .collect(Collectors.toList());
@@ -111,6 +132,12 @@ public class IntershipServiceImpl implements IinternshipService {
                     dto.setEndDate(internship.getEndDate());
                     dto.setCategoryId(internship.getCategory().getId());
                     dto.setSectorId(internship.getSector().getId());
+                    dto.setId(internship.getId());
+                    dto.setCountry(internship.getCountry());
+                    dto.setCity(internship.getCity());
+                    dto.setRecruiter(internship.getRecruiter());
+                    dto.setRecruiterEmail(internship.getRecruiterEmail());
+                    dto.setRecruiterPhoneNumber(internship.getRecruiterPhoneNumber());
                     return dto;
                 })
                 .collect(Collectors.toList());
@@ -130,7 +157,13 @@ public class IntershipServiceImpl implements IinternshipService {
         internship.setTitle(dto.getTitle());
         internship.setStartDate(dto.getStartDate());
         internship.setEndDate(dto.getEndDate());
+        internship.setCountry(dto.getCountry());
+        internship.setCity(dto.getCity());
+        internship.setRecruiter(dto.getRecruiter());
+        internship.setRecruiterEmail(dto.getRecruiterEmail());
+        internship.setRecruiterPhoneNumber(dto.getRecruiterPhoneNumber());
         internshipRepo.save(internship);
+        dto.setId(internship.getId());
         return dto;
     }
 
@@ -153,7 +186,12 @@ public class IntershipServiceImpl implements IinternshipService {
         internship.setStartDate(dto.getStartDate());
         internship.setEndDate(dto.getEndDate());
         internship.setTitle(dto.getTitle());
-        System.out.println("setting done");
+        internship.setCountry(dto.getCountry());
+        internship.setCity(dto.getCity());
+        internship.setRecruiter(dto.getRecruiter());
+        internship.setRecruiterEmail(dto.getRecruiterEmail());
+        internship.setRecruiterPhoneNumber(dto.getRecruiterPhoneNumber());
+        dto.setId(internship.getId());
         return dto;
     }
 

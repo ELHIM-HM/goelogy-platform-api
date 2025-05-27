@@ -34,6 +34,7 @@ public class EventServiceImpl implements IEventService {
         return events.stream()
                 .map((event)->{
                     EventDTO dto = new EventDTO();
+                    dto.setId(event.getId());
                     dto.setTitle(event.getTitle());
                     dto.setDescription(event.getDescription());
                     dto.setDate(event.getDate());
@@ -46,11 +47,14 @@ public class EventServiceImpl implements IEventService {
 
     @Override
     public List<EventDTO> getEventsByCategory(long id, int page, int size) {
+        EventCategory category =categoryRepo.findById(id)
+                .orElseThrow(()-> new EventCategoryNotFoundException("category couldn't be found"));
         Pageable pageable = PageRequest.of(page, size);
         Page<Event> events = eventRepo.findByCategoryId(id,pageable);
         return events.stream()
                 .map((event)->{
                     EventDTO dto = new EventDTO();
+                    dto.setId(event.getId());
                     dto.setTitle(event.getTitle());
                     dto.setDescription(event.getDescription());
                     dto.setDate(event.getDate());
@@ -66,6 +70,7 @@ public class EventServiceImpl implements IEventService {
         Event event = eventRepo.findById(id)
                 .orElseThrow(()->new EventNotFoundException("event couldn't be found"));
         EventDTO dto = new EventDTO();
+        dto.setId(event.getId());
         dto.setTitle(event.getTitle());
         dto.setDescription(event.getDescription());
         dto.setDate(event.getDate());
@@ -81,6 +86,7 @@ public class EventServiceImpl implements IEventService {
        return eventRepo.findTop3ByOrderByIdDesc()
                .stream().map((event)->{
                    EventDTO dto = new EventDTO();
+                   dto.setId(event.getId());
                    dto.setTitle(event.getTitle());
                    dto.setDescription(event.getDescription());
                    dto.setDate(event.getDate());
@@ -105,6 +111,7 @@ public class EventServiceImpl implements IEventService {
         event.setSummary(dto.getSummary());
         event.setCategory(category);
         eventRepo.save(event);
+        dto.setId(event.getId());
         return dto;
     }
 
@@ -122,6 +129,7 @@ public class EventServiceImpl implements IEventService {
         event.setLocation(dto.getLocation());
         event.setSummary(dto.getSummary());
         event.setCategory(category);
+        dto.setId(event.getId());
         return dto;
     }
 

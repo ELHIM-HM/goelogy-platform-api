@@ -1,27 +1,23 @@
 package com.geology_platform.geology.entity.event_internship;
-import jakarta.validation.constraints.Pattern;
+
+
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Pattern;
+import jdk.jfr.Enabled;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
-import java.util.Date;
-
 @Entity
 @Data
-@AllArgsConstructor @NoArgsConstructor
-public class Internship {
-    //add Entreprise and remote and country and city
+@NoArgsConstructor @AllArgsConstructor
+public class Job {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String title;
     private String description;
-    private double remuneration;
-    private LocalDate startDate;
-    private LocalDate endDate;
     private String recruiter;
     @Pattern(regexp = "^(\\+\\d{1,3})?\\d{8,15}$")
     private String recruiterPhoneNumber;
@@ -29,8 +25,14 @@ public class Internship {
     private String recruiterEmail;
     private String country;
     private String city;
-    @ManyToOne
-    private InternshipCategory category;
+    private String contractType;
+    private int requiredExperienceDuration;
     @ManyToOne
     private ActivitySector sector;
+    @ManyToOne
+    private InternshipCategory category;
+    private boolean remote;
+
+
+
 }
