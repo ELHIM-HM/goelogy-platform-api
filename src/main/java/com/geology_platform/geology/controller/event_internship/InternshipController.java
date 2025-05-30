@@ -18,6 +18,16 @@ public class InternshipController {
 
     private IntershipServiceImpl internshipService;
 
+    @GetMapping("internship")
+    public List<InternshipDTO> getFilteredInternships(
+            @RequestParam(required = false) Long categoryId,
+            @RequestParam(required = false) Long sectorId,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size
+    ) {
+        return internshipService.getFilteredInternships(categoryId, sectorId, page, size);
+    }
+
     @GetMapping("internship/")
     public List<InternshipDTO> getAllInternships(
             @RequestParam(defaultValue = "0") int page,

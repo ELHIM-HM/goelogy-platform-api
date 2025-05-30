@@ -1,6 +1,8 @@
 package com.geology_platform.geology.controller.event_internship;
 
+import com.geology_platform.geology.dto.both.InternshipDTO;
 import com.geology_platform.geology.dto.both.JobDTO;
+import com.geology_platform.geology.entity.event_internship.Job;
 import com.geology_platform.geology.service.event_internship.impl.JobServiceImpl;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -15,6 +17,16 @@ import java.util.List;
 @AllArgsConstructor
 public class JobController {
     private JobServiceImpl jobService;
+
+    @GetMapping("job")
+    public List<JobDTO> getFilteredInternships(
+            @RequestParam(required = false) Long categoryId,
+            @RequestParam(required = false) Long sectorId,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size
+    ) {
+        return jobService.getFilteredJobs(categoryId, sectorId, page, size);
+    }
 
 
     @GetMapping("job/{id}/")

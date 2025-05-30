@@ -34,6 +34,45 @@ public class IntershipServiceImpl implements IinternshipService {
     private ActivitySectorRepository sectorRepo;
 
 
+
+    public List<InternshipDTO> getFilteredInternships(Long categoryId, Long sectorId, int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        Page<Internship> result;
+
+        if (categoryId != null && sectorId != null) {
+            result = internshipRepo.findByCategoryIdAndSectorId(categoryId, sectorId, pageable);
+        } else if (categoryId != null) {
+            result = internshipRepo.findByCategoryId(categoryId, pageable);
+        } else if (sectorId != null) {
+            result = internshipRepo.findBySectorId(sectorId, pageable);
+        } else {
+            result = internshipRepo.findAll(pageable);
+        }
+
+        return result.stream().map(
+                internship -> {
+                    InternshipDTO dto = new InternshipDTO();
+                    dto.setId(internship.getId());
+                    dto.setDescription(internship.getDescription());
+                    dto.setRemuneration(internship.getRemuneration());
+                    dto.setTitle(internship.getTitle());
+                    dto.setStartDate(internship.getStartDate());
+                    dto.setEndDate(internship.getEndDate());
+                    System.out.println("wash hna");
+                    dto.setCategoryId(internship.getCategory().getId());
+                    System.out.println("idan mashi hna");
+                    dto.setSectorId(internship.getSector().getId());
+                    dto.setCountry(internship.getCountry());
+                    dto.setCity(internship.getCity());
+                    dto.setRecruiter(internship.getRecruiter());
+                    dto.setRecruiterEmail(internship.getRecruiterEmail());
+                    dto.setRecruiterPhoneNumber(internship.getRecruiterPhoneNumber());
+                    return dto;}
+        ).collect(Collectors.toList());
+    }
+
+
+
     @Override
     public InternshipDTO getInternshipById(long id){
         Internship internship = internshipRepo.findById(id).

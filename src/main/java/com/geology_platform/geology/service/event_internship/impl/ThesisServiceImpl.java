@@ -18,6 +18,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 @Service
@@ -26,6 +27,37 @@ import java.util.stream.Collectors;
 public class ThesisServiceImpl implements IThesisService {
     private IThesisRepository thesisRepo;
     private TeacherRepo teacherRepo;
+
+    public List<ThesisDTO> getFilteredTheses(ThesisStatus status, Level level, int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        Page<Thesis> result;
+
+        if (status != null && level != null) {
+            result = thesisRepo.findByStatusAndLevel(status, level, pageable);
+        } else if (status != null) {
+            result = thesisRepo.findByStatus(status, pageable);
+        } else if (level != null) {
+            result = thesisRepo.findByLevel(level, pageable);
+        } else {
+            result = thesisRepo.findAll(pageable);
+        }
+
+        return result.stream().map(
+                thesis -> {
+                    ThesisDTO dto = new ThesisDTO();
+                    dto.setId(thesis.getId());
+                    dto.setSubject(thesis.getSubject());
+                    dto.setDescription(thesis.getDescription());
+                    dto.setCreatedAt(thesis.getCreatedAt());
+                    dto.setLevel(thesis.getLevel().name());
+                    dto.setStatus(thesis.getStatus().name());
+                    dto.setSupervisorId(thesis.getSupervisor().getId());
+                    return dto;}
+        ).collect(Collectors.toList());
+    }
+
+
+
 
 
     @Override

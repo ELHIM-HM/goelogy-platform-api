@@ -10,5 +10,6 @@ public interface InternshipRepository extends JpaRepository<Internship,Long> {
 
     Page<Internship> findBySectorId(long id, Pageable pageable);
     Page<Internship> findByCategoryId(long id,Pageable pageable);
+    Page<Internship> findByCategoryIdAndSectorId(Long categoryId, Long sectorId, Pageable pageable);
 
 }

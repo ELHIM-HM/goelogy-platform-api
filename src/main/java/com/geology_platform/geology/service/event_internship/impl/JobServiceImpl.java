@@ -1,5 +1,6 @@
 package com.geology_platform.geology.service.event_internship.impl;
 
+import com.geology_platform.geology.dto.both.InternshipDTO;
 import com.geology_platform.geology.dto.both.JobDTO;
 import com.geology_platform.geology.entity.event_internship.*;
 import com.geology_platform.geology.exception.event_internship.EventCategoryNotFoundException;
@@ -28,6 +29,39 @@ public class JobServiceImpl implements IJobService {
     private IJobRepository jobRepo;
     private ActivitySectorRepository sectorRepo;
     private InternshipCategoryRepository categoryRepo;
+
+    public List<JobDTO> getFilteredJobs(Long categoryId, Long sectorId, int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        Page<Job> result;
+
+        if (categoryId != null && sectorId != null) {
+            result = jobRepo.findByCategoryIdAndSectorId(categoryId, sectorId, pageable);
+        } else if (categoryId != null) {
+            result = jobRepo.findByCategoryId(categoryId, pageable);
+        } else if (sectorId != null) {
+            result = jobRepo.findBySectorId(sectorId, pageable);
+        } else {
+            result = jobRepo.findAll(pageable);
+        }
+        return result.stream().map(
+                job -> {
+                    JobDTO dto = new JobDTO();
+                    dto.setId(job.getId());
+                    dto.setDescription(job.getDescription());
+                    dto.setCity(job.getCity());
+                    dto.setCountry(job.getCountry());
+                    dto.setTitle(job.getTitle());
+                    dto.setRecruiter(job.getRecruiter());
+                    dto.setContractType(job.getContractType());
+                    dto.setCategoryId(job.getCategory().getId());
+                    dto.setSectorId(job.getSector().getId());
+                    dto.setRecruiterPhoneNumber(job.getRecruiterPhoneNumber());
+                    dto.setRecruiterEmail(job.getRecruiterEmail());
+                    dto.setRequiredExperienceDurationInMonths(job.getRequiredExperienceDuration());
+                    return dto;}
+        ).collect(Collectors.toList());
+    }
+    
     @Override
     public List<JobDTO> getAllJobs(int page, int size) {
         Pageable pageable = PageRequest.of(page, size);
