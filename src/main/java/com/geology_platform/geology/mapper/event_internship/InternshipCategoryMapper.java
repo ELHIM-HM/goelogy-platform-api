@@ -9,6 +9,7 @@ public class InternshipCategoryMapper {
         if(category==null) return null;
         InternshipCategoryDTO dto = new InternshipCategoryDTO();
         dto.setLabel(category.getLabel());
+        dto.setId(category.getId());
         return dto;
     }
 
