@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Data
@@ -20,11 +21,18 @@ public class Thesis {
     private String description;
     @CreationTimestamp
     private LocalDate createdAt ;
+    private LocalDate startDate;
+    private LocalDate endDate;
     @Enumerated(EnumType.STRING)
     private Level level;
     @Enumerated(EnumType.STRING)
     private ThesisStatus status;
-    @ManyToOne
-    private Teacher supervisor;
+    @ManyToMany
+    @JoinTable(
+            name = "thesis_supervisor",
+            joinColumns = @JoinColumn(name = "thesis_id"),
+            inverseJoinColumns = @JoinColumn(name = "supervisor_id")
+    )
+    private List<Teacher> supervisors;
 
 }

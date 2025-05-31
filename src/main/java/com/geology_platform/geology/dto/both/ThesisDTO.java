@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Data
 @NoArgsConstructor @AllArgsConstructor
@@ -22,7 +23,9 @@ public class ThesisDTO {
     private String description;
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private LocalDate createdAt ;
+    private LocalDate startDate;
+    private LocalDate endDate;
     private String level;
     private String status;
-    private long supervisorId;
+    private List<Long> supervisorsIds;
 }

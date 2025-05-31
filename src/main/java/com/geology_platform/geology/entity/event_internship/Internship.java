@@ -29,6 +29,7 @@ public class Internship {
     private String recruiterEmail;
     private String country;
     private String city;
+    private boolean isRemote;
     @ManyToOne
     private InternshipCategory category;
     @ManyToOne

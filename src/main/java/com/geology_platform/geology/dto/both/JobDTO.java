@@ -11,7 +11,6 @@ import lombok.NoArgsConstructor;
 
 @AllArgsConstructor @NoArgsConstructor
 @Data
-@Getter
 public class JobDTO {
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private int id;

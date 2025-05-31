@@ -6,6 +6,7 @@ import com.geology_platform.geology.entity.event_internship.Thesis;
 import com.geology_platform.geology.entity.event_internship.ThesisStatus;
 import com.geology_platform.geology.entity.teacher.Teacher;
 import com.geology_platform.geology.exception.event_internship.ThesisNotFoundException;
+import com.geology_platform.geology.exception.teacher.TeacherNotFoundException;
 import com.geology_platform.geology.repository.event_internship.IThesisRepository;
 import com.geology_platform.geology.repository.teacher.TeacherRepo;
 import com.geology_platform.geology.service.event_internship.interfaces.IThesisService;
@@ -51,7 +52,14 @@ public class ThesisServiceImpl implements IThesisService {
                     dto.setCreatedAt(thesis.getCreatedAt());
                     dto.setLevel(thesis.getLevel().name());
                     dto.setStatus(thesis.getStatus().name());
-                    dto.setSupervisorId(thesis.getSupervisor().getId());
+                    dto.setStartDate(thesis.getStartDate());
+                    dto.setEndDate(thesis.getEndDate());
+                    dto.setSupervisorsIds(
+                            thesis.getSupervisors()
+                                    .stream()
+                                    .map(Teacher::getId)
+                                    .collect(Collectors.toList())
+                    );
                     return dto;}
         ).collect(Collectors.toList());
     }
@@ -73,7 +81,14 @@ public class ThesisServiceImpl implements IThesisService {
                     dto.setCreatedAt(thesis.getCreatedAt());
                     dto.setLevel(thesis.getLevel().name());
                     dto.setStatus(thesis.getStatus().name());
-                    dto.setSupervisorId(thesis.getSupervisor().getId());
+                    dto.setStartDate(thesis.getStartDate());
+                    dto.setEndDate(thesis.getEndDate());
+                    dto.setSupervisorsIds(
+                            thesis.getSupervisors()
+                                    .stream()
+                                    .map(Teacher::getId)
+                                    .collect(Collectors.toList())
+                    );
                     return dto;
                 }).collect(Collectors.toList());
 
@@ -91,7 +106,14 @@ public class ThesisServiceImpl implements IThesisService {
         dto.setCreatedAt(thesis.getCreatedAt());
         dto.setLevel(thesis.getLevel().name());
         dto.setStatus(thesis.getStatus().name());
-        dto.setSupervisorId(thesis.getSupervisor().getId());
+        dto.setStartDate(thesis.getStartDate());
+        dto.setEndDate(thesis.getEndDate());
+        dto.setSupervisorsIds(
+                thesis.getSupervisors()
+                        .stream()
+                        .map(Teacher::getId)
+                        .collect(Collectors.toList())
+        );
         return dto;
     }
 
@@ -108,7 +130,14 @@ public class ThesisServiceImpl implements IThesisService {
                     dto.setCreatedAt(thesis.getCreatedAt());
                     dto.setLevel(thesis.getLevel().name());
                     dto.setStatus(thesis.getStatus().name());
-                    dto.setSupervisorId(thesis.getSupervisor().getId());
+                    dto.setStartDate(thesis.getStartDate());
+                    dto.setEndDate(thesis.getEndDate());
+                    dto.setSupervisorsIds(
+                            thesis.getSupervisors()
+                                    .stream()
+                                    .map(Teacher::getId)
+                                    .collect(Collectors.toList())
+                    );
                     return dto;
                 }).collect(Collectors.toList());
     }
@@ -126,66 +155,110 @@ public class ThesisServiceImpl implements IThesisService {
                     dto.setCreatedAt(thesis.getCreatedAt());
                     dto.setLevel(thesis.getLevel().name());
                     dto.setStatus(thesis.getStatus().name());
-                    dto.setSupervisorId(thesis.getSupervisor().getId());
-                    return dto;
-                }).collect(Collectors.toList());
-    }
-
-    @Override
-    public List<ThesisDTO> getThesisBySupervisor(long id, int page, int size) {
-        Pageable pageable = PageRequest.of(page, size);
-        Page<Thesis> theses = thesisRepo.findBySupervisorId(id,pageable);
-        return theses.stream()
-                .map(thesis -> {
-                    ThesisDTO dto = new ThesisDTO();
-                    dto.setId(thesis.getId());
-                    dto.setSubject(thesis.getSubject());
-                    dto.setDescription(thesis.getDescription());
-                    dto.setCreatedAt(thesis.getCreatedAt());
-                    dto.setLevel(thesis.getLevel().name());
-                    dto.setStatus(thesis.getStatus().name());
-                    dto.setSupervisorId(thesis.getSupervisor().getId());
+                    dto.setStartDate(thesis.getStartDate());
+                    dto.setEndDate(thesis.getEndDate());
+                    dto.setSupervisorsIds(
+                            thesis.getSupervisors()
+                                    .stream()
+                                    .map(Teacher::getId)
+                                    .collect(Collectors.toList())
+                    );
                     return dto;
                 }).collect(Collectors.toList());
     }
 
     @Override
     public ThesisDTO createThesis(ThesisDTO dto) {
-        Teacher teacher = teacherRepo.findById(dto.getSupervisorId())
-                .orElseThrow(()->new ThesisNotFoundException("teacher couldn't be found"));
         Thesis thesis = new Thesis();
-        thesis.setSupervisor(teacher);
+        thesis.setStartDate(dto.getStartDate());
+        thesis.setEndDate(dto.getEndDate());
         thesis.setDescription(dto.getDescription());
         thesis.setSubject(dto.getSubject());
         thesis.setLevel(Level.fromString(dto.getLevel()));
         System.out.println("levle recu dans post:"+dto.getLevel());
         thesis.setStatus(ThesisStatus.fromString(dto.getStatus()));
+        if (dto.getSupervisorsIds() != null && !dto.getSupervisorsIds().isEmpty()) {
+            List<Long> requestedIds = dto.getSupervisorsIds();
+            List<Teacher> supervisors = teacherRepo.findAllById(requestedIds);
+
+            // Vérifier que tous les IDs demandés existent
+            List<Long> foundIds = supervisors.stream()
+                    .map(Teacher::getId)
+                    .toList();
+
+            List<Long> missingIds = requestedIds.stream()
+                    .filter(id -> !foundIds.contains(id))
+                    .toList();
+
+            if (!missingIds.isEmpty()) {
+                throw new TeacherNotFoundException("Les encadrants suivants sont introuvables : " + missingIds);
+            }
+
+            thesis.setSupervisors(supervisors);
+        }
+
+
+
         thesisRepo.save(thesis);
         dto.setId(thesis.getId());
         dto.setStatus(thesis.getStatus().name());
         dto.setLevel(thesis.getLevel().name());
         dto.setCreatedAt(thesis.getCreatedAt());
+        dto.setSupervisorsIds(
+                thesis.getSupervisors()
+                        .stream()
+                        .map(Teacher::getId)
+                        .collect(Collectors.toList())
+        );
         return dto;
     }
 
     @Override
-    public ThesisDTO updateThesis(long id,ThesisDTO dto) {
-        Teacher teacher = teacherRepo.findById(dto.getSupervisorId())
-                .orElseThrow(()->new ThesisNotFoundException("teacher couldn't be found"));
+    public ThesisDTO updateThesis(long thesisId,ThesisDTO dto) {
+//        Teacher teacher = teacherRepo.findById(dto.getSupervisorId())
+//                .orElseThrow(()->new ThesisNotFoundException("teacher couldn't be found"));
 
-        Thesis thesis = thesisRepo.findById(id)
+        Thesis thesis = thesisRepo.findById(thesisId)
                 .orElseThrow(()->new ThesisNotFoundException("thesis couldn't be found"));
-        thesis.setSupervisor(teacher);
+        thesis.setStartDate(dto.getStartDate());
+        thesis.setEndDate(dto.getEndDate());
         thesis.setDescription(dto.getDescription());
         thesis.setSubject(dto.getSubject());
         thesis.setLevel(Level.fromString(dto.getLevel()));
         System.out.println("levle recu dans put:"+dto.getLevel());
         thesis.setStatus(ThesisStatus.fromString(dto.getStatus()));
         System.out.println("statut recu dans put:"+dto.getStatus());
+
+        if (dto.getSupervisorsIds() != null && !dto.getSupervisorsIds().isEmpty()) {
+            List<Long> requestedIds = dto.getSupervisorsIds();
+            List<Teacher> supervisors = teacherRepo.findAllById(requestedIds);
+
+            // Vérifier que tous les IDs demandés existent
+            List<Long> foundIds = supervisors.stream()
+                    .map(Teacher::getId)
+                    .toList();
+
+            List<Long> missingIds = requestedIds.stream()
+                    .filter(id -> !foundIds.contains(id))
+                    .toList();
+
+            if (!missingIds.isEmpty()) {
+                throw new TeacherNotFoundException("Les encadrants suivants sont introuvables : " + missingIds);
+            }
+
+            thesis.setSupervisors(supervisors);
+        }
+
         dto.setId(thesis.getId());
         dto.setStatus(thesis.getStatus().name());
         dto.setLevel(thesis.getLevel().name());
         dto.setCreatedAt(thesis.getCreatedAt());
+        dto.setSupervisorsIds(
+                thesis.getSupervisors()
+                        .stream()
+                        .map(Teacher::getId)
+                        .collect(Collectors.toList())
+        );
         return dto;
     }
 

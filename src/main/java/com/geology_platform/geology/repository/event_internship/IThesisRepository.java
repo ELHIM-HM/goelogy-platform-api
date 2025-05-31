@@ -11,7 +11,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface IThesisRepository extends JpaRepository<Thesis,Long> {
     Page<Thesis> findByLevel(Level level, Pageable pageable);
     Page<Thesis> findByStatus(ThesisStatus status, Pageable pageable);
-    Page<Thesis> findBySupervisorId(long id,Pageable pageable);
+//    Page<Thesis> findBySupervisorId(long id,Pageable pageable);
     Page<Thesis> findByStatusAndLevel(ThesisStatus status, Level level,Pageable pageable);
 
 }

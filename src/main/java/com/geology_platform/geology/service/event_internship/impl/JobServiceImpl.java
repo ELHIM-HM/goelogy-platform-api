@@ -58,6 +58,7 @@ public class JobServiceImpl implements IJobService {
                     dto.setRecruiterPhoneNumber(job.getRecruiterPhoneNumber());
                     dto.setRecruiterEmail(job.getRecruiterEmail());
                     dto.setRequiredExperienceDurationInMonths(job.getRequiredExperienceDuration());
+                    dto.setRemote(job.isRemote());
                     return dto;}
         ).collect(Collectors.toList());
     }
@@ -82,6 +83,7 @@ public class JobServiceImpl implements IJobService {
                     dto.setRecruiterPhoneNumber(job.getRecruiterPhoneNumber());
                     dto.setRecruiterEmail(job.getRecruiterEmail());
                     dto.setRequiredExperienceDurationInMonths(job.getRequiredExperienceDuration());
+                    dto.setRemote(job.isRemote());
                     return dto;
                 }).collect(Collectors.toList());
     }
@@ -108,6 +110,7 @@ public class JobServiceImpl implements IJobService {
                   dto.setRecruiterPhoneNumber(job.getRecruiterPhoneNumber());
                   dto.setRecruiterEmail(job.getRecruiterEmail());
                   dto.setRequiredExperienceDurationInMonths(job.getRequiredExperienceDuration());
+                  dto.setRemote(job.isRemote());
                   return dto;
               }).collect(Collectors.toList());
 
@@ -134,6 +137,7 @@ public class JobServiceImpl implements IJobService {
                     dto.setRecruiterPhoneNumber(job.getRecruiterPhoneNumber());
                     dto.setRecruiterEmail(job.getRecruiterEmail());
                     dto.setRequiredExperienceDurationInMonths(job.getRequiredExperienceDuration());
+                    dto.setRemote(job.isRemote());
                     return dto;
                 }).collect(Collectors.toList());
 
@@ -157,6 +161,7 @@ public class JobServiceImpl implements IJobService {
         dto.setRecruiterPhoneNumber(job.getRecruiterPhoneNumber());
         dto.setRecruiterEmail(job.getRecruiterEmail());
         dto.setRequiredExperienceDurationInMonths(job.getRequiredExperienceDuration());
+        dto.setRemote(job.isRemote());
         return dto;
     }
 
@@ -167,8 +172,14 @@ public class JobServiceImpl implements IJobService {
         ActivitySector sector = sectorRepo.findById((long)dto.getSectorId())
                 .orElseThrow(()->new SectorNotFoundException("this sector couldn't be found"));
         Job job = new Job();
-        job.setCity(dto.getCity());
-        job.setCountry(dto.getCountry());
+        job.setRemote(dto.isRemote());
+        if(dto.isRemote()){
+            job.setCity(null);
+            job.setCountry(null);
+        }else{
+            job.setCountry(dto.getCountry());
+            job.setCity(dto.getCity());
+        }
         job.setRecruiter(dto.getRecruiter());
         job.setContractType(dto.getContractType());
         job.setTitle(dto.getTitle());
@@ -182,6 +193,9 @@ public class JobServiceImpl implements IJobService {
         job.setSector(sector);
         jobRepo.save(job);
         dto.setId(job.getId());
+        dto.setCountry(job.getCountry());
+        dto.setCity(job.getCity());
+        dto.setRemote(job.isRemote());
         return dto;
 
     }
@@ -193,8 +207,14 @@ public class JobServiceImpl implements IJobService {
                 .orElseThrow(()-> new EventCategoryNotFoundException("category couldn't be found"));
         ActivitySector sector = sectorRepo.findById((long)dto.getSectorId())
                 .orElseThrow(()->new SectorNotFoundException("this sector couldn't be found"));
-        job.setCity(dto.getCity());
-        job.setCountry(dto.getCountry());
+        job.setRemote(dto.isRemote());
+        if(dto.isRemote()){
+            job.setCity(null);
+            job.setCountry(null);
+        }else{
+            job.setCountry(dto.getCountry());
+            job.setCity(dto.getCity());
+        }
         job.setRecruiter(dto.getRecruiter());
         job.setContractType(dto.getContractType());
         job.setTitle(dto.getTitle());
@@ -207,6 +227,9 @@ public class JobServiceImpl implements IJobService {
         job.setCategory(category);
         job.setSector(sector);
         dto.setId(job.getId());
+        dto.setCountry(job.getCountry());
+        dto.setCity(job.getCity());
+        dto.setRemote(job.isRemote());
         return dto;
     }
 

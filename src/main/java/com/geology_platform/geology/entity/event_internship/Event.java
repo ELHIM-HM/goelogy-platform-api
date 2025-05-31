@@ -1,5 +1,6 @@
 package com.geology_platform.geology.entity.event_internship;
 
+import com.geology_platform.geology.entity.FileData;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -19,6 +20,9 @@ public class Event {
     private String title;
     private String description;
     private String summary;
+    @OneToOne(cascade = CascadeType.ALL,fetch =FetchType.EAGER)
+    @JoinColumn(name = "img_id")
+    private FileData img;
     @ManyToOne
     private EventCategory category;
 }

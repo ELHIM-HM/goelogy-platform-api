@@ -37,7 +37,7 @@ public class ThesisController {
         return thesisService.getThesis(thesisId);
     }
 
-    @GetMapping
+    @GetMapping("thesis/")
     public List<ThesisDTO> getAllThesis(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size
@@ -68,7 +68,7 @@ public class ThesisController {
         return thesisService.getThesisByLevel(Level.fromString(level),page,size);
     }
 
-    @PostMapping
+    @PostMapping("thesis/")
     @ResponseStatus(HttpStatus.CREATED)
     public ThesisDTO createThesis(
             @RequestBody ThesisDTO dto

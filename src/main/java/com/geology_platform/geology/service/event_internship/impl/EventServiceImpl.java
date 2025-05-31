@@ -9,13 +9,16 @@ import com.geology_platform.geology.exception.event_internship.EventNotFoundExce
 import com.geology_platform.geology.repository.event_internship.EventCategoryRepository;
 import com.geology_platform.geology.repository.event_internship.EventRepository;
 import com.geology_platform.geology.service.event_internship.interfaces.IEventService;
+import com.geology_platform.geology.service.fileUpload.FileUploadServiceImpl;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -25,6 +28,7 @@ import java.util.stream.Collectors;
 public class EventServiceImpl implements IEventService {
     private EventRepository eventRepo;
     private EventCategoryRepository categoryRepo;
+    private FileUploadServiceImpl fileUploadService;
 
 
     @Override
@@ -41,6 +45,7 @@ public class EventServiceImpl implements IEventService {
                     dto.setLocation(event.getLocation());
                     dto.setSummary(event.getSummary());
                     dto.setCategoryId(event.getCategory().getId());
+                    dto.setImg(event.getImg());
                     return dto;
                 }).collect(Collectors.toList());
     }
@@ -98,12 +103,13 @@ public class EventServiceImpl implements IEventService {
     }
 
     @Override
-    public EventDTO createEvent(EventDTO dto) {
+    public EventDTO createEvent(EventDTO dto, MultipartFile img) throws IOException {
 
         EventCategory category =categoryRepo.findById((long) dto.getCategoryId())
                 .orElseThrow(()-> new EventCategoryNotFoundException("category couldn't be found"));
 
         Event event = new Event();
+        event.setImg(fileUploadService.uploadFileToFileSystem(img));
         event.setTitle(dto.getTitle());
         event.setDescription(dto.getDescription());
         event.setDate(dto.getDate());

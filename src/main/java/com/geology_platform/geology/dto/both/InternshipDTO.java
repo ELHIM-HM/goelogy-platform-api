@@ -26,6 +26,7 @@ public class InternshipDTO {
     private String recruiterEmail;
     private String country;
     private String city;
+    private boolean isRemote;
     private long categoryId;
     private long sectorId;
 }
