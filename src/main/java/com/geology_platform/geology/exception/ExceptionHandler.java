@@ -18,7 +18,9 @@ public class ExceptionHandler {
                     SectorNotFoundException.class,
                     JobNotFoundException.class,
                     ThesisNotFoundException.class,
-                    TeacherNotFoundException.class
+                    TeacherNotFoundException.class,
+                    EntrepriseNotFoundException.class,
+                    StudyAnnouncementException.class
             }
             )
 
@@ -35,7 +37,8 @@ public class ExceptionHandler {
             {
             InternshipCategoryExistsAlready.class,
             EventCategoryExistsAlready.class,
-            SectorExistsAlready.class
+            SectorExistsAlready.class,
+            EntrepriseExistsAlready.class
             }
 
     )
