@@ -45,7 +45,7 @@ public class ThesisController {
        return thesisService.getAllThesis(page, size);
     }
 
-  /*  @Operation(description = "retrieves all these with the status provided as a pathvariable\n" +
+  /* @Operation(description = "retrieves all these with the status provided as a pathvariable\n" +
             "status accepted: 'assigned' , 'available', lowercase or uppercase, doesn't matter ")
     @GetMapping("thesis/status/{status}/")
     public List<ThesisDTO> getThesesByStatus(
