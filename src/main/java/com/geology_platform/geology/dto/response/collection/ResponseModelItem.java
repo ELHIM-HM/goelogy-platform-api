@@ -35,5 +35,6 @@ public class ResponseModelItem {
 
     private FileData model3d;
     private FileData video;
+    private List<FileData> images;
 
 }
