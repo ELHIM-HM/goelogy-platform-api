@@ -4,6 +4,8 @@ import com.geology_platform.geology.entity.teacher.AccountValidationCode;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 /**
  * @author ELHIM Hamza
  **/
@@ -11,4 +13,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface CodeGenerationRepo extends JpaRepository<AccountValidationCode,Long> {
     String findByCode(String code);
+
+    Optional<AccountValidationCode> getByCode(String verificationCode);
+
 }

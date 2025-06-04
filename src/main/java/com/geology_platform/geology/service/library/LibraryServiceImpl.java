@@ -38,7 +38,6 @@ public class LibraryServiceImpl implements LibraryService{
     private ArticleCategoryMapper articleCategoryMapper;
     private ArticleRepo articleRepo;
     private FileUploadServiceImpl fileUploadService;
-    private FileDataRepo fileDataRepo;
 
     @Override
     public List<RequestArticleCategory> getAllCategories() {

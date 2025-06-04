@@ -26,10 +26,10 @@ public class TeacherRestController {
         this.teacherService = teacherService;
     }
 
-    @PostMapping("/grades/{gradeId}/teachers")
+    @PostMapping("/grades/{gradeName}/teachers")
     @ResponseStatus(HttpStatus.CREATED)
-    public void addTeacher(@RequestBody Teacher teacher,@PathVariable Long gradeId){
-        teacherService.addTeacher(gradeId,teacher);
+    public void addTeacher(@RequestBody Teacher teacher,@PathVariable String gradeName){
+        teacherService.addTeacher(gradeName,teacher);
     }
 
     @PostMapping("/grades")
@@ -76,14 +76,8 @@ public class TeacherRestController {
     public void validateTeacher(@PathVariable Long id,@PathVariable boolean isValidated){
          teacherService.validateTeacher(id,isValidated);
     }
-//
-//    @DeleteMapping("/teachers/{id}")
-//    @ResponseStatus(HttpStatus.OK)
-//    public void removeTeacher(@PathVariable Long id){
-//        teacherService.removeTeacher(id);
-//    }
-//
-//
+
+
 
 
 

@@ -13,7 +13,7 @@ public interface TeacherService {
     void addGrade(GradeDto gradeDto);
     List<GradeDto> loadGrades();
 
-    void addTeacher(Long gradeId,Teacher teacher);
+    void addTeacher(String gradeName,Teacher teacher);
     void validateTeacher(Long id,boolean isValidated);
     Long teachersCount();
 

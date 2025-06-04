@@ -8,6 +8,8 @@ import lombok.Data;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.hibernate.annotations.CreationTimestamp;
 
+import java.util.Date;
+
 /**
  * @author ELHIM Hamza
  **/
@@ -21,9 +23,10 @@ public class AccountValidationCode {
 
     private String code = RandomStringUtils.randomAlphanumeric(8).toLowerCase();
 
-    @CreationTimestamp
-    private Long createdAt;
+
 
     private Long duration;
+
+    private Date expiredDate;
 
 }

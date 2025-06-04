@@ -27,7 +27,7 @@ public class RockProperties {
     @Column(name = "rockId")
     private Long rockId;
 
-    @Column(name = "name", nullable = false)
+    @Column(name = "name")
     private String name;
 
     @Column(name = "rock_type")

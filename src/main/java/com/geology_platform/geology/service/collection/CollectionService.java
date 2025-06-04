@@ -5,6 +5,7 @@ import com.geology_platform.geology.dto.request.collection.RequestMineraisModel;
 import com.geology_platform.geology.dto.request.collection.RequestMineralModel;
 import com.geology_platform.geology.dto.request.collection.RequestRockModel;
 import com.geology_platform.geology.dto.response.collection.ResponseModelItem;
+import com.geology_platform.geology.entity.FileData;
 import com.geology_platform.geology.entity.collection.ModelItem;
 import com.geology_platform.geology.entity.collection.SubCategory;
 import com.geology_platform.geology.exception.collection.ModelNotFound;
@@ -21,6 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -57,7 +59,7 @@ public class CollectionService {
 
 
     @Transactional
-    public void createRockModel(RequestRockModel requestRockModel, MultipartFile model3d,MultipartFile video) throws IOException {
+    public void createRockModel(RequestRockModel requestRockModel, MultipartFile model3d,MultipartFile video,List<MultipartFile> images) throws IOException {
 
 
 
@@ -70,6 +72,18 @@ public class CollectionService {
         requestRockModel.setModel3d(fileUploadService.uploadFileToFileSystem(model3d));
         requestRockModel.setVideo(fileUploadService.uploadFileToFileSystem(video));
 
+        if(images != null){
+            List<FileData> imagesList = new ArrayList<>();
+
+            for(MultipartFile image:images){
+                imagesList.add(fileUploadService.uploadFileToFileSystem(image));
+            }
+
+            requestRockModel.setImages(imagesList);
+        }
+
+
+
         subCategory.addModelItem(rockModelMapper.toEntity(requestRockModel));
 
         subCateogryRepo.save(subCategory);
@@ -79,7 +93,7 @@ public class CollectionService {
 
 
     @Transactional
-    public void createFossilModel(RequestFossilModel requestFossilModel,MultipartFile model3d,MultipartFile video) throws IOException {
+    public void createFossilModel(RequestFossilModel requestFossilModel,MultipartFile model3d,MultipartFile video , List<MultipartFile> images) throws IOException {
 
         SubCategory subCategory = subCateogryRepo.findById(requestFossilModel.getSubcategoryId()).orElseThrow(()->new SubCategoryNotFound(requestFossilModel.getSubcategoryId()));
 
@@ -87,6 +101,16 @@ public class CollectionService {
 
         requestFossilModel.setModel3d(fileUploadService.uploadFileToFileSystem(model3d));
         requestFossilModel.setVideo(fileUploadService.uploadFileToFileSystem(video));
+
+        if(images !=null){
+            List<FileData> imagesList = new ArrayList<>();
+
+            for(MultipartFile image:images){
+                imagesList.add(fileUploadService.uploadFileToFileSystem(image));
+            }
+
+            requestFossilModel.setImages(imagesList);
+        }
 
 
         subCategory.addModelItem(fossilModelMapper.toEntity(requestFossilModel));
@@ -97,7 +121,7 @@ public class CollectionService {
     }
 
     @Transactional
-    public void createMineralModel(RequestMineralModel requestMineralModel,MultipartFile model3d,MultipartFile video) throws IOException {
+    public void createMineralModel(RequestMineralModel requestMineralModel,MultipartFile model3d,MultipartFile video , List<MultipartFile> images) throws IOException {
 
         SubCategory subCategory = subCateogryRepo.findById(requestMineralModel.getSubcategoryId()).orElseThrow(()->new SubCategoryNotFound(requestMineralModel.getSubcategoryId()));
 
@@ -105,6 +129,16 @@ public class CollectionService {
 
         requestMineralModel.setModel3d(fileUploadService.uploadFileToFileSystem(model3d));
         requestMineralModel.setVideo(fileUploadService.uploadFileToFileSystem(video));
+
+        if(images !=null){
+            List<FileData> imagesList = new ArrayList<>();
+
+            for(MultipartFile image:images){
+                imagesList.add(fileUploadService.uploadFileToFileSystem(image));
+            }
+
+            requestMineralModel.setImages(imagesList);
+        }
 
 
         subCategory.addModelItem(mineralModelMapper.toEntity(requestMineralModel));
@@ -115,7 +149,7 @@ public class CollectionService {
     }
 
     @Transactional
-    public void createMineraisModel(RequestMineraisModel requestMineraisModel,MultipartFile model3d,MultipartFile video) throws IOException {
+    public void createMineraisModel(RequestMineraisModel requestMineraisModel,MultipartFile model3d,MultipartFile video , List<MultipartFile> images) throws IOException {
 
         SubCategory subCategory = subCateogryRepo.findById(requestMineraisModel.getSubcategoryId()).orElseThrow(()->new SubCategoryNotFound(requestMineraisModel.getSubcategoryId()));
 
@@ -123,6 +157,16 @@ public class CollectionService {
 
         requestMineraisModel.setModel3d(fileUploadService.uploadFileToFileSystem(model3d));
         requestMineraisModel.setVideo(fileUploadService.uploadFileToFileSystem(video));
+
+        if(images != null){
+            List<FileData> imagesList = new ArrayList<>();
+
+            for(MultipartFile image:images){
+                imagesList.add(fileUploadService.uploadFileToFileSystem(image));
+            }
+
+            requestMineraisModel.setImages(imagesList);
+        }
 
 
         subCategory.addModelItem(mineraisMapper.toEntity(requestMineraisModel));

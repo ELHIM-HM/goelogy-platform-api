@@ -22,7 +22,8 @@ public class Formation {
     private String name;
 
 
-    @OneToMany(mappedBy = "formation",fetch = FetchType.LAZY)
+
+    @OneToMany(mappedBy = "formation",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     private List<Branche> brancheList = new ArrayList<>();
 
     public void addBranche(Branche branche){

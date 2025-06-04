@@ -40,6 +40,11 @@ public class RequestRockModel {
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private FileData video;
 
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    private List<FileData> images;
+
+
+
 
 
 }

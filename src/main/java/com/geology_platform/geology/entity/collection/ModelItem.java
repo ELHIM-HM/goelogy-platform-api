@@ -61,6 +61,11 @@ public class ModelItem {
     private FileData video;
 
 
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @JoinColumn(name = "image_id")
+    private List<FileData> images = new ArrayList<>();
+
+
 
     public void addOtherInfos(String name,String value){
         otherInfos.add(new OtherInfos(name,value));
@@ -68,6 +73,11 @@ public class ModelItem {
 
     public void removeOtherInfos(OtherInfos other){
         otherInfos.remove(other);
+    }
+
+
+    public void addImage(FileData image){
+        images.add(image);
     }
 
 
