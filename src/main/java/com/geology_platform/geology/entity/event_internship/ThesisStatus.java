@@ -7,6 +7,7 @@ public enum ThesisStatus {
     AVAILABLE,
     ASSIGNED;
     public static ThesisStatus fromString(String value) {
+        if (value == null || value.isBlank()) return null;
         try {
             return ThesisStatus.valueOf(value.toUpperCase());
         } catch (IllegalArgumentException e) {
