@@ -3,7 +3,9 @@ package com.geology_platform.geology.controller.event_internship;
 
 import com.geology_platform.geology.dto.both.InternshipDTO;
 import com.geology_platform.geology.dto.both.ThesisDTO;
+import com.geology_platform.geology.dto.both.ThesisRequestDTO;
 import com.geology_platform.geology.entity.event_internship.Level;
+import com.geology_platform.geology.entity.event_internship.Thesis;
 import com.geology_platform.geology.entity.event_internship.ThesisStatus;
 import com.geology_platform.geology.service.event_internship.impl.ThesisServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
@@ -45,39 +47,17 @@ public class ThesisController {
        return thesisService.getAllThesis(page, size);
     }
 
-  /* @Operation(description = "retrieves all these with the status provided as a pathvariable\n" +
-            "status accepted: 'assigned' , 'available', lowercase or uppercase, doesn't matter ")
-    @GetMapping("thesis/status/{status}/")
-    public List<ThesisDTO> getThesesByStatus(
-            @PathVariable String status,
-            @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "10") int size
-    ){
-            return thesisService.getThesisByStatus(ThesisStatus.fromString(status),page,size);
-    }
 
-    @Operation(description = "retrieves all these with the level provided as a pathvariable\n" +
-            "levels accepted: 'licence' , 'master', 'doctorat' lowercase or uppercase, doesn't matter")
-    @GetMapping("thesis/level/{level}/")
-    public List<ThesisDTO> getThesesByLevel(
-            @PathVariable String level,
-            @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "10") int size
-    ){
-
-        return thesisService.getThesisByLevel(Level.fromString(level),page,size);
-    }
-*/
     @PostMapping("thesis/")
     @ResponseStatus(HttpStatus.CREATED)
     public ThesisDTO createThesis(
-            @RequestBody ThesisDTO dto
+            @RequestBody ThesisRequestDTO dto
             ){
         return thesisService.createThesis(dto);
     }
 
     @PutMapping("thesis/{thesisId}/")
-    public ThesisDTO updateThesis(@PathVariable long thesisId,@RequestBody ThesisDTO dto){
+    public ThesisDTO updateThesis(@PathVariable long thesisId,@RequestBody ThesisRequestDTO dto){
         return thesisService.updateThesis(thesisId,dto);
     }
 

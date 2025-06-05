@@ -27,7 +27,7 @@ public class Thesis {
     private Level level;
     @Enumerated(EnumType.STRING)
     private ThesisStatus status;
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "thesis_supervisor",
             joinColumns = @JoinColumn(name = "thesis_id"),
