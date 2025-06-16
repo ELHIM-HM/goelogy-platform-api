@@ -13,6 +13,6 @@ public interface IEventService {
     public List<EventDTO>  getEventsByCategory(long id,int page,int size);
     public EventDTO getEvent(long id);
     public EventDTO createEvent(EventDTO dto, MultipartFile img) throws IOException;
-    public EventDTO updateEvent(long id,EventDTO dto);
+    public EventDTO updateEvent(long id,EventDTO dto,MultipartFile img) throws IOException;
     public void deleteEvent(long id);
 }

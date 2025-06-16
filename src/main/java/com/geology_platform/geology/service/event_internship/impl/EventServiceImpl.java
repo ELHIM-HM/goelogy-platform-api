@@ -66,6 +66,7 @@ public class EventServiceImpl implements IEventService {
                     dto.setLocation(event.getLocation());
                     dto.setSummary(event.getSummary());
                     dto.setCategoryId(event.getCategory().getId());
+                    dto.setImg(event.getImg());
                     return dto;
                 }).collect(Collectors.toList());
     }
@@ -82,6 +83,7 @@ public class EventServiceImpl implements IEventService {
         dto.setLocation(event.getLocation());
         dto.setSummary(event.getSummary());
         dto.setCategoryId(event.getCategory().getId());
+        dto.setImg(event.getImg());
 //        dto.setCategoryLabel(event.getCategory().getLabel());
         return dto;
     }
@@ -98,6 +100,7 @@ public class EventServiceImpl implements IEventService {
                    dto.setLocation(event.getLocation());
                    dto.setSummary(event.getSummary());
                    dto.setCategoryId(event.getCategory().getId());
+                   dto.setImg(event.getImg());
                    return dto;
                }).collect(Collectors.toList());
     }
@@ -122,7 +125,7 @@ public class EventServiceImpl implements IEventService {
     }
 
     @Override
-    public EventDTO updateEvent(long id, EventDTO dto) {
+    public EventDTO updateEvent(long id, EventDTO dto,MultipartFile img) throws IOException {
         Event event = eventRepo.findById(id)
                 .orElseThrow(()->new EventNotFoundException("event couldn't br found"));
 
@@ -135,6 +138,7 @@ public class EventServiceImpl implements IEventService {
         event.setLocation(dto.getLocation());
         event.setSummary(dto.getSummary());
         event.setCategory(category);
+        event.setImg(fileUploadService.uploadFileToFileSystem(img));
         dto.setId(event.getId());
         return dto;
     }

@@ -56,8 +56,10 @@ public class EventController {
 
     @PutMapping("event/{id}/")
     @ResponseStatus(HttpStatus.OK)
-    public EventDTO updateEvent(@PathVariable long id, @RequestBody EventDTO dto){
-        return eventService.updateEvent(id,dto);
+    public EventDTO updateEvent(@PathVariable long id, @RequestBody EventDTO dto, @RequestPart(name = "image") MultipartFile img)
+    throws IOException
+    {
+        return eventService.updateEvent(id,dto,img);
     }
 
     @DeleteMapping("event/{id}/")
