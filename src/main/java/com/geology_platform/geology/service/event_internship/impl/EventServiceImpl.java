@@ -120,7 +120,9 @@ public class EventServiceImpl implements IEventService {
         event.setSummary(dto.getSummary());
         event.setCategory(category);
         eventRepo.save(event);
+//        return event;
         dto.setId(event.getId());
+//        dto.setImg(fileUploadService.uploadFileToFileSystem(img));
         return dto;
     }
 

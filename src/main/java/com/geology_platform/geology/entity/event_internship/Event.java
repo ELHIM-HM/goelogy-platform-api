@@ -20,7 +20,7 @@ public class Event {
     private String title;
     private String description;
     private String summary;
-    @OneToOne(cascade = CascadeType.ALL,fetch =FetchType.EAGER)
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "img_id")
     private FileData img;
     @ManyToOne

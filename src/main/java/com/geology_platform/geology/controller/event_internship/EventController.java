@@ -1,6 +1,7 @@
 package com.geology_platform.geology.controller.event_internship;
 
 import com.geology_platform.geology.dto.both.EventDTO;
+import com.geology_platform.geology.entity.event_internship.Event;
 import com.geology_platform.geology.service.event_internship.impl.EventServiceImpl;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -56,7 +57,7 @@ public class EventController {
 
     @PutMapping("event/{id}/")
     @ResponseStatus(HttpStatus.OK)
-    public EventDTO updateEvent(@PathVariable long id, @RequestBody EventDTO dto, @RequestPart(name = "image") MultipartFile img)
+    public EventDTO updateEvent(@PathVariable long id, @RequestPart(name="event") EventDTO dto, @RequestPart(name = "image") MultipartFile img)
     throws IOException
     {
         return eventService.updateEvent(id,dto,img);
