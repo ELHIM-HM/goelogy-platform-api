@@ -77,6 +77,12 @@ public class SecurityConfig {
     }
 
     @Bean
+    public AuthenticationManager authenticationManager(HttpSecurity http) throws Exception {
+        AuthenticationManagerBuilder builder =  http.getSharedObject(AuthenticationManagerBuilder.class);
+        return builder.build();
+    }
+
+    @Bean
     protected SecurityFilterChain securityFilterChain(HttpSecurity http,AuthenticationManager authenticationManager) throws  Exception {
         http.cors(cors->cors.configurationSource(corsConfigurationSource()))
                 .csrf(csrf->csrf.disable())
@@ -96,11 +102,7 @@ public class SecurityConfig {
 
     }
 
-    @Bean
-    public AuthenticationManager authenticationManager(HttpSecurity http) throws Exception {
-        AuthenticationManagerBuilder builder =  http.getSharedObject(AuthenticationManagerBuilder.class);
-        return builder.build();
-    }
+
 
 
 
