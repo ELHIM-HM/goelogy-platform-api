@@ -64,7 +64,7 @@ A core innovation is the **Virtual Museum**, allowing remote interaction with th
 
 | 3D Collection Grid | Specimen Detail View |
 | :---: | :---: |
-| <img src="assets/virtual-museum.png" alt="3D Collection" width="400"/> | <img src="assets/specimen-detail.png" alt="Specimen Detail" width="400"/> |
+| <img src="assets/virtual-museum.png" alt="3D Collection" width="200"/> | <img src="assets/specimen-detail.png" alt="Specimen Detail" width="400"/> |
 | *Categorized geological samples.* | *High-fidelity rendering with metadata.* |
 
 ---
