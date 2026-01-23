@@ -43,25 +43,58 @@ Security is paramount for institutional data. The platform implements a robust, 
 
 ---
 
-## ✨ Key Features
+## ✨ Key Features & Visuals
+
+### 🔐 Security & User Experience
+The platform ensures secure access for all stakeholders (Students, Professors, Admins) using JWT-based authentication.
+* **Secure Login:** Encrypted credential validation.
+* **Role-Based Dashboards:** Custom UI views depending on user permissions.
+
+| Login Interface | User Profile Management |
+| :---: | :---: |
+| <img src="assets/login-page.png" alt="Login Page" width="400"/> | <img src="assets/user-profile.png" alt="Profile" width="400"/> |
+| *Secure entry point for all users.* | *Personalized profile settings.* |
+
+---
 
 ### 🏛️ Virtual Museum (3D Visualization)
-A core innovation of the platform is the **Virtual Museum**, utilized for the preservation of the department's rich geological heritage.
-* **Tech:** Built with **Three.js** to render high-fidelity 3D models of minerals, rocks, and fossils directly in the browser.
-* **Impact:** Allows remote interaction (zoom, rotate) with fragile specimens that are physically stored in the department.
-* ![Uploading image.png…]()
+A core innovation is the **Virtual Museum**, allowing remote interaction with the department's physical collection.
+* **Tech:** Three.js rendering of minerals and rocks.
+* **Interaction:** Users can rotate, zoom, and analyze specimen textures.
 
+| 3D Collection Grid | Specimen Detail View |
+| :---: | :---: |
+| <img src="assets/virtual-museum.png" alt="3D Collection" width="400"/> | <img src="assets/specimen-detail.png" alt="Specimen Detail" width="400"/> |
+| *Categorized geological samples.* | *High-fidelity rendering with metadata.* |
 
-### 🎓 Smart Classroom Management
-The platform revolutionizes the traditional learning model by integrating real-time remote capabilities.
-* **Conferencing:** Seamless integration with **Jitsi Meet** allows teachers to launch and manage live video classrooms directly from the dashboard.
-* **Courseware:** Teachers can structure courses, upload resources (PDF/Docs), and generate unique access codes for student enrollment.
+---
 
-### 🗄️ Geological Data Handling
-Designed to handle complex scientific datasets:
-* **Specimen Cataloging:** A structured database (**MySQL**) manages extensive metadata for geological collections, including chemical formulas, crystal systems, and texture data.
-* **Digital Library:** A centralized repository for scientific articles, e-books, and educational videos, categorized for easy retrieval.
+### 🎓 Smart Classroom & Remote Learning
+The platform includes a full Learning Management System (LMS) module.
+* **Course Stream:** Professors can post announcements and lectures.
+* **Live Conferencing:** Integrated Jitsi Meet for real-time virtual classes.
 
+| Teacher Dashboard | Course Details & Resources |
+| :---: | :---: |
+| <img src="assets/teacher-dashboard.png" alt="Dashboard" width="400"/> | <img src="assets/course-details.png" alt="Course Stream" width="400"/> |
+| *Global view of active courses.* | *Specific course timeline and files.* |
+
+| Live Conference Interface |
+| :---: |
+| <img src="assets/video-conference.png" alt="Jitsi Meet" width="600"/> |
+| *Real-time video lectures integrated directly into the browser.* |
+
+---
+
+### 📚 Digital Library & Resources
+To support research, the platform centralizes scientific documentation.
+* **Resource Hub:** Access to PDF theses, geological maps, and articles.
+* **Searchable:** Filter content by category or publication date.
+
+> **Digital Library Interface**
+>
+> ![Digital Library](assets/digital-library.png)
+> *Central repository for scientific articles and geological references.*
 ---
 
 ## 🔌 API Documentation
