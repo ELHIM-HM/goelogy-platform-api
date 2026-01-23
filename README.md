@@ -50,10 +50,10 @@ The platform ensures secure access for all stakeholders (Students, Professors, A
 * **Secure Login:** Encrypted credential validation.
 * **Role-Based Dashboards:** Custom UI views depending on user permissions.
 
-| Login Interface | User Profile Management |
-| :---: | :---: |
-| <img src="assets/login-page.png" alt="Login Page" width="400"/> | <img src="assets/user-profile.png" alt="Profile" width="400"/> |
-| *Secure entry point for all users.* | *Personalized profile settings.* |
+|                         Login Interface                         | User Profile Management |
+|:---------------------------------------------------------------:| :---: |
+| <img src="assets/login-page.png" alt="Login Page" width="200"/> | <img src="assets/user-profile.png" alt="Profile" width="400"/> |
+|               *Secure entry point for all users.*               | *Personalized profile settings.* |
 
 ---
 
@@ -62,10 +62,10 @@ A core innovation is the **Virtual Museum**, allowing remote interaction with th
 * **Tech:** Three.js rendering of minerals and rocks.
 * **Interaction:** Users can rotate, zoom, and analyze specimen textures.
 
-| 3D Collection Grid | Specimen Detail View |
-| :---: | :---: |
-| <img src="assets/virtual-museum.png" alt="3D Collection" width="200"/> | <img src="assets/specimen-detail.png" alt="Specimen Detail" width="400"/> |
-| *Categorized geological samples.* | *High-fidelity rendering with metadata.* |
+|                                 3D Collection Grid                                  |                            Specimen Detail View                            |
+|:-----------------------------------------------------------------------------------:|:--------------------------------------------------------------------------:|
+| <img src="assets/virtual-museum.png" alt="3D Collection" width="200" height="160"/> | <img src="assets/specimen-detail.png" alt="Specimen Detail" width="400" height="160"/> |
+|                          *Categorized geological samples.*                          |                  *High-fidelity rendering with metadata.*                  |
 
 ---
 
@@ -74,10 +74,10 @@ The platform includes a full Learning Management System (LMS) module.
 * **Course Stream:** Professors can post announcements and lectures.
 * **Live Conferencing:** Integrated Jitsi Meet for real-time virtual classes.
 
-| Teacher Dashboard | Course Details & Resources |
-| :---: | :---: |
-| <img src="assets/teacher-dashboard.png" alt="Dashboard" width="400"/> | <img src="assets/course-details.png" alt="Course Stream" width="400"/> |
-| *Global view of active courses.* | *Specific course timeline and files.* |
+|                           Teacher Dashboard                            |                             Course Details & Resources                             |
+|:----------------------------------------------------------------------:|:----------------------------------------------------------------------------------:|
+| <img src="assets/teacher-dashboard.png" alt="Dashboard" width="400" height="80"/> | <img src="assets/course-details.png" alt="Course Stream" width="400" height="80"/> |
+|                    *Global view of active courses.*                    |                       *Specific course timeline and files.*                        |
 
 | Live Conference Interface |
 | :---: |
@@ -125,6 +125,9 @@ To replicate the production environment locally, we utilize **Docker** for conta
     ```bash
     docker-compose up --build
     ```
+    
+    // you can run the project also with IntelliJ IDEA or your favorite IDE
+
 3.  **Access Local Instance:**
     * API: `http://localhost:9000/api`
     * Swagger: `http://localhost:9000/docs`
