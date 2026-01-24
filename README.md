@@ -117,17 +117,11 @@ To replicate the production environment locally, we utilize **Docker** for conta
 1.  **Clone the repository:**
     ```bash
     git clone https://github.com/mizoham/goelogy-platform-api.git
-    cd digital-geology-platform
     ```
 
-2.  **Run with Docker Compose:**
-    Ensure Docker Desktop is running. This will spin up the Spring Boot API and the MySQL database container.
-    ```bash
-    docker-compose up --build
-    ```
+2.  **Run with IntelliJ IDEA:**
+
     
-    // you can run the project also with IntelliJ IDEA or your favorite IDE
-
 3.  **Access Local Instance:**
     * API: `http://localhost:9000/api`
     * Swagger: `http://localhost:9000/docs`
