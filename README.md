@@ -116,7 +116,7 @@ To replicate the production environment locally, we utilize **Docker** for conta
 
 1.  **Clone the repository:**
     ```bash
-    git clone https://github.com/mizoham/goelogy-platform-api.git
+    git clone https://github.com/ELHIM-HM/goelogy-platform-api.git
     ```
 
 2.  **Run with IntelliJ IDEA:**
