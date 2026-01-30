@@ -118,11 +118,15 @@ To replicate the production environment locally, we utilize **Docker** for conta
     ```bash
     git clone https://github.com/ELHIM-HM/goelogy-platform-api.git
     ```
+2. **be sure to use openjdk 21 to run the project**
 
-2.  **Run with IntelliJ IDEA:**
+3. **Run with IntelliJ IDEA: Or with powershell using at the rool level of the project**
+4. ```bash
+    ./mvnw spring-boot:run
+    ```
 
     
-3.  **Access Local Instance:**
+5. **Access Local Instance:**
     * API: `http://localhost:9000/api`
     * Swagger: `http://localhost:9000/docs`
 
