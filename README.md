@@ -120,7 +120,7 @@ To replicate the production environment locally, we utilize **Docker** for conta
     ```
 2. **be sure to use openjdk 21 to run the project**
 
-3. **Run with IntelliJ IDEA: Or with powershell using at the rool level of the project**
+3. **Run with IntelliJ IDEA: Or with powershell using this command at the rool level of the project**
 4. ```bash
     ./mvnw spring-boot:run
     ```
