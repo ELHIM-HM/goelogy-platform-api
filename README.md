@@ -110,7 +110,7 @@ The backend exposes a comprehensive set of RESTful endpoints documented via Swag
 
 ---
 
-## 🛠️ Installation & Setup (Docker)
+## 🛠️ Installation & Setup 
 
 To replicate the production environment locally, we utilize **Docker** for containerization.
 
